@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Pokémon Search App</h1>
+    </header>
+    <main>
+        <div id="app-container">
+            <form>
+                <label for="search-input">Search for Pokémon by name or number</label>
+                <input id="search-input" type="text">
+                <button id="search-button">Search</button>
+                <p id="note">For Pokémon with ♀ or ♂ as part of its name, add "m" or "f" at end of name</p>
+            </form>
+            <div id="output">
+                <h3 id="name-and-id"><span id="pokemon-name"></span> <span id="pokemon-id"></span></h3>
+                <p id="pkmn-size"><span id="weight"></span> <span id="height"></span></p>
+                <div id="img-container"></div>
+                <div id="types"></div>
+            </div>
+            <table id="stats">
+                <tr>
+                    <th scope="col">Base</th>
+                    <th scope="col">Stats</th>
+                </tr>
+                <tr>
+                    <th scope="row">HP</th>
+                    <td id="hp"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Attack</th>
+                    <td id="attack"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Defense</th>
+                    <td id="defense"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Sp. Attack</th>
+                    <td id="special-attack"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Sp. Defense</th>
+                    <td id="special-defense"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Speed</th>
+                    <td id="speed"></td>
+                </tr>
+            </table>
+        </div>
+    </main>
+</body>
