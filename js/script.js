@@ -11,6 +11,7 @@ const defense = document.getElementById("defense");
 const spAttack = document.getElementById("special-attack");
 const spDefense = document.getElementById("special-defense");
 const speed = document.getElementById("speed");
+const spriteContainer = document.getElementById("img-container");
 
 const specialCharRegExp = /[^a-z0-9 ]/gi;
 const whiteSpaceRegExp = /\s/g;
@@ -39,20 +40,44 @@ searchBtn.addEventListener("click", e => {
     }
     const nameOrId = searchInput.value.toLowerCase().replace(specialCharRegExp, "").replace(whiteSpaceRegExp, "-");    
     console.log("Pokemon name or ID:", nameOrId);
-    findPokemon(nameOrId);
-    setTimeout(console.log(pokemon), 2000);
+    findPokemon(nameOrId);  
 
 });
 
-const findPokemon = pkmnNameOrId => {
-    fetch(`https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/${pkmnNameOrId}`)
+const findPokemon = async pkmnNameOrId => {
+    pokemon = await fetch(`https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/${pkmnNameOrId}`)
         .then(res => res.json())
-        .then(data => {
-            pokemon = data;
-        })
+        .then(data => data)
         .catch(err => {
             console.log("Error:", err);
             alert("Pokémon not found.")
         });
+    console.log("Pokemon:", pokemon);
+    updatePokemonDisplay();
+}
+
+const updatePokemonDisplay = () => {
+    types.innerHTML = "";
+    pkmnName.textContent = `${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}`;
+    pkmnId.textContent = `#${pokemon.id}`;
+    weight.innerHTML = `<span class="bold">Weight</span>: ${pokemon.weight}lb`;
+    height.innerHTML = `<span class="bold">Height</span>: ${pokemon.height}'`;
+    hp.textContent = pokemon.stats[0].base_stat;
+    attack.textContent = pokemon.stats[1].base_stat;
+    defense.textContent = pokemon.stats[2].base_stat;
+    spAttack.textContent = pokemon.stats[3].base_stat;
+    spDefense.textContent = pokemon.stats[4].base_stat;
+    speed.textContent = pokemon.stats[5].base_stat;
+    spriteContainer.innerHTML = `<img src="${pokemon.sprites.front_default}" id="sprite">`;
+    const typeNameP = [];
+    console.log("pkmn type test:", pokemon.types[0].type.url, "- VALID");
+    pokemon.types.forEach((el, index) => {    
+        console.log(`type ${index + 1}: ${el.type.name}, url: ${el.type.url}`);
+        typeNameP.push(document.createElement("p"));
+        typeNameP[index].id = `${el.type.name}`
+        typeNameP[index].classList.add("type");
+        typeNameP[index].textContent = `${el.type.name.toUpperCase()}`;
+        types.appendChild(typeNameP[index]);
+    });
 }
 
